@@ -39,7 +39,7 @@
            <br>
 
            <div class="col-md-12">
-            <h2>Objective (1 line per objective)</h2>
+            <h2>Objective (direct copy)</h2>
             <textarea style="width:100%" rows="10" name="objective<?php echo $i; ?>" class="form-control"></textarea>
            </div>
 
