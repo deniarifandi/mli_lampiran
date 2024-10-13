@@ -22,7 +22,7 @@
     for ($i=1; $i < 100; $i++) { 
       if (isset($_POST['objective'.$i])) {
           if ($_POST['objective'.$i] != null) {
-            $objective_array[$i] = explode("\n",$_POST['objective'.$i]);
+            $objective_array[$i] = explode("\t",$_POST['objective'.$i]);
           }
       }
     }
