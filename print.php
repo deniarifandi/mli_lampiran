@@ -74,7 +74,7 @@
    <table class="borderless" style="width:100%; border: 0px !important">
 
     <tr class="borderless">
-      <td class="borderless" style="width:20%">Student Name</td>
+      <td class="borderless" style="width:20%">Student's Name</td>
       <td class="borderless" style="width:50%">: <?php echo $student_array[$x] ?></td>
       <td class="borderless" style="width:30%">Semester 1 AY 2024/2025</td>
 
@@ -149,7 +149,7 @@
             <?php echo $objective_array[$i+1][$obj]; ?>
                <?php // echo $nilai_final[$obj]; ?>
           </td>
-          <td>
+          <td style="text-align:center">
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] < 91) {
@@ -158,7 +158,7 @@
             ?>
             ">
           </td> 
-          <td>
+          <td style="text-align:center">
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 90 || $nilai_final[$obj] < 83) {
@@ -167,7 +167,7 @@
             ?>
             ">
           </td> 
-          <td>
+          <td style="text-align:center">
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 82 || $nilai_final[$obj] < 75) {
@@ -176,7 +176,7 @@
             ?>
             ">
           </td> 
-          <td>
+          <td style="text-align:center">
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 74 || $nilai_final[$obj] <= 0) {
