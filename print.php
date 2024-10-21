@@ -95,7 +95,7 @@
 
     <tr>
       <td colspan="1" class="text-left"><h4 style="padding:0px; margin: 0px;">SUBJECT</h4></td> 
-      <td colspan="4">
+      <td colspan="4" style="text-align:center">
         Formative Assessment
       </td>
     </tr>
