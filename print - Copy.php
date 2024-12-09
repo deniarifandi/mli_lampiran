@@ -1,92 +1,3 @@
-<?php
-// Database connection
-$servername = "localhost"; // Change as per your DB settings
-$username = "root";        // Change as per your DB settings
-$password = "";            // Change as per your DB settings
-$dbname = "lampiran";        // Change as per your DB name
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Get class and student details
-$kelas = $_GET['kelas'] ?? ''; // Optionally use a default value if not provided
-
-$sql = "SELECT * FROM students  JOIN classes ON students.class_id = classes.id WHERE class_id = $kelas";
-$students_result = $conn->query($sql);
-
-$student_array = [];
-if ($students_result->num_rows > 0) {
-    // Fetch the text block
-    $row = $students_result->fetch_assoc();
-    $fullText = $row['student_name'];
-    $class = $row['class_name'];
-
-    // Explode the text block by newlines into an array
-    $lines = explode("\n", $fullText);
-
-    // Output each line
-    foreach ($lines as $line) {
-        // echo $line . "<br>";
-    }
-} else {
-    echo "No data found.";
-}
-
-// echo $lines[0];
-
-$sql2 = "SELECT * FROM subjects WHERE class_id = $kelas";
-$subjects_result = $conn->query($sql2);
-
-$objective_array = [];
-
-if ($subjects_result->num_rows > 0) {
-    // Fetch the text block
-    // $row = $subjects_result->fetch_assoc();
-
-    while( $row = $subjects_result->fetch_assoc()){
-        $list_subjects_array[] = $row;
-    }
-
-
-
-    // $fullTextSub = $row['objective'];
-    // $fullTextNilai = $row['nilai'];
-
-    // Explode the text block by newlines into an array
-    // $objective_array = explode("\t", $fullTextSub);
-
-    // // Output each line
-    // foreach ($objective_array as $line) {
-    //     // echo $line . "<br>";
-    // }
-} else {
-    echo "No data found.";
-}
-// print_r($list_subjects_array);
-// print_r($list_subjects_array[0]['id']);
-
-// while ($row = $subjects_result->fetch_assoc()) {
-//     $objective_array[$row['subject_name']][] = [
-//         'objective' => $row['objective'],
-//         'grade' => $row['nilai'],
-//     ];
-// }
-
-// echo $objective_array[];
-
-// echo json_encode($objective_array);
-
-// $subject_stmt->close();
-$conn->close();
-?>
-
-<!-- Your HTML and logic for displaying -->
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,29 +14,29 @@ $conn->close();
 </style>
 <?php
 
+    $student_array = explode("\n",$_POST['student']);
+
+    // all obje
     $objective_array = [];
 
     for ($i=1; $i < 100; $i++) { 
-      if (isset($list_subjects_array[$i])) {
-          if ($list_subjects_array[$i]['objective'] != null) {
-            $subjectName_array[$i] = $list_subjects_array[$i]['subject_name'];
-            $nilaiArray[$i] = $list_subjects_array[$i]['nilai'];
-            $objective_array[$i] = explode("\t",$list_subjects_array[$i]['objective']);
+      if (isset($_POST['objective'.$i])) {
+          if ($_POST['objective'.$i] != null) {
+            $objective_array[$i] = explode("\t",$_POST['objective'.$i]);
           }
       }
     }
 
-    for ($i=0; $i < count($list_subjects_array); $i++) { 
-            $subjectName_array[$i] = $list_subjects_array[$i]['subject_name'];
-            $nilaiArray[$i] = $list_subjects_array[$i]['nilai'];
-            $objective_array[$i] = explode("\t",$list_subjects_array[$i]['objective']);
-    }
+    // // all nilai
+    // $nilai_array = [];
 
-    
-
-    // echo $subjectName_array[1];
-    // echo $objective_array[1][1];
-    // print_r($nilaiArray[1]);
+    // for ($i=1; $i < 100; $i++) { 
+    //   if (isset($_POST['nilai'.$i])) {
+    //       if ($_POST['nilai'.$i] != null) {
+    //         $nilai_array[$i] = explode("\t",$_POST['nilai'.$i]);
+    //       }
+    //   }
+    // }
 
     ?>
 
@@ -151,7 +62,7 @@ $conn->close();
 </style>
 <body style="width:90%; padding-left:4%">
 
-  <?php for ($x=0; $x < count($lines); $x++) { 
+  <?php for ($x=0; $x < count($student_array); $x++) { 
 
     ?>
     <!-- --------------- start lampiran -->
@@ -163,16 +74,15 @@ $conn->close();
    <table class="borderless" style="width:100%; border: 0px !important">
 
     <tr class="borderless">
-
       <td class="borderless" style="width:20%">Student Name</td>
-      <td class="borderless" style="width:50%">: <?php echo $lines[$x] ?></td>
+      <td class="borderless" style="width:50%">: <?php echo $student_array[$x] ?></td>
       <td class="borderless" style="width:30%">Semester 1 AY 2024/2025</td>
 
 
     </tr>
     <tr class="borderless">
       <td class="borderless">Class</td>
-      <td class="borderless">: <?php echo $class ?></td>
+      <td class="borderless">: <?php echo $_POST['kelas']; ?></td>
       <td class="borderless">Term : 1</td>
 
       
@@ -181,13 +91,11 @@ $conn->close();
   <br>
 
 
-
-
-<table style="width:100%">
+  <table style="width:100%">
 
     <tr>
       <td colspan="1" class="text-left"><h4 style="padding:0px; margin: 0px;">SUBJECT</h4></td> 
-      <td colspan="4" style="text-align:center">
+      <td colspan="4">
         Formative Assessment
       </td>
     </tr>
@@ -210,7 +118,6 @@ $conn->close();
 
     <?php for ($i=0; $i < count($objective_array); $i++) { 
       $checkNilai = 0;
-      // echo $objective_array[];
       ?>
       
 
@@ -218,9 +125,7 @@ $conn->close();
 
         $checkNilai = 0;
 
-        $nilai_explode_stu = explode("\n",$nilaiArray[$i]);
-        $nilai_explode_stu = 
-
+        $nilai_explode_stu = explode("\n",$_POST['nilai'.$i+1]);
         $nilai_final = explode("\t",$nilai_explode_stu[$x]);
 
         for ($d=0; $d < count($nilai_final); $d++) { 
@@ -230,32 +135,30 @@ $conn->close();
 
         if($checkNilai!=0){
           ?>
-          <tr id="subnameverif<?php echo $i; ?>">
-          <td colspan="5"><h4 style="margin:0px; padding:0px"><?php echo $subjectName_array[$i]; ?></h4></td>
+          <tr id="subnameverif<?php echo $i+1; ?>">
+          <td colspan="5"><h4 style="margin:0px; padding:0px"><?php echo $_POST['subject'.$i+1]; ?></h4></td>
         </tr>
           <?php
         }
 
         if($checkNilai!=0)
-      for ($obj=0; $obj < count($objective_array[$i]); $obj++) { 
+      for ($obj=0; $obj < count($objective_array[$i+1]); $obj++) { 
         ?>
         <tr>
           <td>
-            <?php echo $objective_array[$i][$obj]; ?>
+            <?php echo $objective_array[$i+1][$obj]; ?>
                <?php // echo $nilai_final[$obj]; ?>
           </td>
-          <td style="text-align:center">
+          <td>
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] < 91) {
                 ?> display:none <?php
-
               }
             ?>
             ">
-            
           </td> 
-          <td style="text-align:center">
+          <td>
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 90 || $nilai_final[$obj] < 83) {
@@ -264,7 +167,7 @@ $conn->close();
             ?>
             ">
           </td> 
-          <td style="text-align:center">
+          <td>
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 82 || $nilai_final[$obj] < 75) {
@@ -273,7 +176,7 @@ $conn->close();
             ?>
             ">
           </td> 
-          <td style="text-align:center">
+          <td>
             <img src="centang.png" style="max-width:20px;
             <?php 
               if ($nilai_final[$obj] > 74 || $nilai_final[$obj] <= 0) {

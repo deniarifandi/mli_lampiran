@@ -1,3 +1,35 @@
+
+<?php
+
+$servername = "localhost"; // Change as per your DB settings
+$username = "root";        // Change as per your DB settings
+$password = "";            // Change as per your DB settings
+$dbname = "lampiran";        // Change as per your DB name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM classes where deleted = 0";
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+  
+ while( $row = $result->fetch_assoc()){
+    $list_hasil_array[] = $row;
+}
+} else {
+  echo "0 results";
+}
+
+// print_r($hasil_array);
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,64 +40,42 @@
 </head>
 <body>
   <div class="container"> 
-    <h1>Converter Ma bro!</h1>
+    <h1>Converter Ma bro v2.0</h1>
     <br><br>
-    <form action="print.php" method="POST" target="_blank">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Class</h2>
-          <input type="text" style="width:100%" rows="10" name="kelas" class="form-control"></input>
-        </div>
-        <div class="col-md-12">
-          <h2>Student (1 line per student)</h2>
-          <textarea style="width:100%" rows="10" name="student" class="form-control"></textarea>
-        </div>
-      </div>
-      <br>
+    
+    
+      <a class="btn btn-success" href="insert.php">Tambah Data</a>
+      <br><br>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+          <th>No</th>
+          <th>Kelas</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
 
-      <?php for ($i=1; $i < 100; $i++) { ?>
-     
-      <div id="content_subject<?php echo $i; ?>" style="display: none;">
-         <h3 style="color: red;">Subject ke <?php echo $i; ?></h3>
-         <hr>
-         <!-- Start Input 1 -->
-         <div class="row">
+          <?php for ($i=0; $i < count($list_hasil_array); $i++) { 
+            ?>
+            <tr>
+              <td><?php echo $i+1; ?></td>
+              <td><?php echo $list_hasil_array[$i]['class_name'] ?></td>
+              <td>
+                <a class="btn btn-primary" href="edit.php?kelas=<?php echo $list_hasil_array[$i]['id'] ?>">Edit</a>
+                <a class="btn btn-success" target="_blank" href="print.php?kelas=<?php echo $list_hasil_array[$i]['id'] ?>">Print</a>
+              </td>
+            </tr>
+            <?php 
+          } ?>
 
-          <div class="col-md-12">
-           <h2>Nama Subject</h2>
-           <input type="text" name="subject<?php echo $i; ?>" class="form-control">
-          </div>
-           <br>
-           <br>
+          
 
-           <div class="col-md-12">
-            <h2>Objective (direct copy)</h2>
-            <textarea style="width:100%" rows="10" name="objective<?php echo $i; ?>" class="form-control"></textarea>
-           </div>
-
-          </div>
-          <div class="col-md-12">
-            <h2>Nilai (direct copy)</h2>
-            <textarea style="width:100%" rows="10" name="nilai<?php echo $i; ?>" class="form-control"></textarea>
-          </div>
-          <br>
-          <br><br><br><br>
-      </div>
-      <!-- End Input 1 -->
-
-      <?php } ?>
-
-       <a class="btn btn-warning" type="button" id="addsubject" style="font-size: 30px; width:100%;  float: right;" onclick="addSubject()">Add subject</a>
-       <br>
-       <br><br><br><br><br>
-  <input class="btn btn-success" type="submit" id="submit_button" style="font-size: 30px; float: right;">
-  <br><br>
-</div>
+        </tbody>
+      </table>
 
 
-
-</form>
-
+   
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
