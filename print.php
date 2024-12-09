@@ -1,16 +1,6 @@
 <?php
-// Database connection
-$servername = "localhost"; // Change as per your DB settings
-$username = "root";        // Change as per your DB settings
-$password = "";            // Change as per your DB settings
-$dbname = "lampiran";        // Change as per your DB name
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('connect.php');;
 
 // Get class and student details
 $kelas = $_GET['kelas'] ?? ''; // Optionally use a default value if not provided
