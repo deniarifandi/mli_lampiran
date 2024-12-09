@@ -54,6 +54,7 @@ if ($result->num_rows > 0) {
               <td>
                 <a class="btn btn-primary" href="edit.php?kelas=<?php echo $list_hasil_array[$i]['id'] ?>">Edit</a>
                 <a class="btn btn-success" target="_blank" href="print.php?kelas=<?php echo $list_hasil_array[$i]['id'] ?>">Print</a>
+                <a class="btn btn-danger" href="deleteData.php?kelas=<?php echo $list_hasil_array[$i]['id'] ?>">Hapus</a>
               </td>
             </tr>
             <?php 
