@@ -3,7 +3,7 @@
 
 include('connect.php');;
 
-$sql = "SELECT * FROM classes where deleted = 0";
+$sql = "SELECT * FROM classes where deleted = 0 order by class_name";
 $result = $conn->query($sql);
 
 
