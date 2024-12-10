@@ -22,8 +22,33 @@
         </div>
       </div>
       <br>
+      <div id="content_subject1" style="">
+         <h3 style="color: red;">Subject ke 1</h3>
+         <hr>
+         <!-- Start Input 1 -->
+         <div class="row">
 
-      <?php for ($i=1; $i < 100; $i++) { ?>
+          <div class="col-md-12">
+           <h2>Nama Subject</h2>
+           <input type="text" name="subject1" class="form-control" required>
+          </div>
+           <br>
+           <br>
+
+           <div class="col-md-12">
+            <h2>Objective (direct copy)</h2>
+            <textarea style="width:100%" rows="10" name="objective1" class="form-control"></textarea>
+           </div>
+
+          </div>
+          <div class="col-md-12">
+            <h2>Nilai (direct copy)</h2>
+            <textarea style="width:100%" rows="10" name="nilai1" class="form-control"></textarea>
+          </div>
+          <br>
+          <br><br><br><br>
+      </div>
+      <?php for ($i=2; $i < 100; $i++) { ?>
      
       <div id="content_subject<?php echo $i; ?>" style="display: none;">
          <h3 style="color: red;">Subject ke <?php echo $i; ?></h3>
@@ -74,7 +99,7 @@
 
 <script type="text/javascript">
   
-  var index = 1;
+  var index = 2;
 
   function addSubject(){
     document.getElementById("content_subject"+index).style.display = "";
