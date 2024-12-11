@@ -51,9 +51,9 @@ $stmt = $conn->prepare("INSERT INTO students (class_id, student_name) VALUES (?,
 // Insert subjects into subjects table
 for ($i = 1; $i < 100; $i++) {
     if (!empty($_POST["subject$i"])) {
-        $subject_name = trim($_POST["subject$i"]);
-        $objective = trim($_POST["objective$i"]);
-        $nilai = trim($_POST["nilai$i"]);
+        $subject_name = $_POST["subject$i"];
+        $objective = $_POST["objective$i"];
+        $nilai = $_POST["nilai$i"];
 
         $stmt = $conn->prepare("INSERT INTO subjects (class_id, subject_name, objective, nilai) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isss", $class_id, $subject_name, $objective, $nilai);
