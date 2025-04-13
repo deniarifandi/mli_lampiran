@@ -156,14 +156,14 @@ $conn->close();
 
       <td class="borderless" style="width:20%">Student Name</td>
       <td class="borderless" style="width:50%">: <?php echo $lines[$x] ?></td>
-      <td class="borderless" style="width:30%">Semester 1 AY 2024/2025</td>
+      <td class="borderless" style="width:30%">Semester 2 AY 2024/2025</td>
 
 
     </tr>
     <tr class="borderless">
       <td class="borderless">Class</td>
       <td class="borderless">: <?php echo $class ?></td>
-      <td class="borderless">Term : 2</td>
+      <td class="borderless">Term : 3</td>
 
       
     </tr>
