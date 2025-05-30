@@ -163,7 +163,7 @@ $conn->close();
     <tr class="borderless">
       <td class="borderless">Class</td>
       <td class="borderless">: <?php echo $class ?></td>
-      <td class="borderless">Term : 3</td>
+      <td class="borderless">Term : 4</td>
 
       
     </tr>
